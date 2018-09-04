@@ -7,7 +7,7 @@ $template = new Template();
 $template->header();
 $template->sidebar();
 $template->mainpanel();
-$logado = $_SESSION["name"]
+$logado = $_SESSION["name"];
 ?>
 
 <div class='content' xmlns="http://www.w3.org/1999/html">
