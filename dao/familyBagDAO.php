@@ -9,8 +9,8 @@ class familyBagDAO
     {
         global $pdo;
         try{
-            $statement = $pdo->prepare("DELETE FROM tb_familyBag_pbf WHERE id_familyBag_pbf = :id");
-            $statement->bindValue(":id", $familyBag->getIdfamilyBagPbf());
+            $statement = $pdo->prepare("DELETE FROM tb_familyBag_ WHERE id_familyBag_ = :id");
+            $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             if ($statement->execute()) {
                 return "<script> alert('Registro foi excluído com êxito !'); </script>";
             } else {
@@ -25,11 +25,11 @@ class familyBagDAO
     {
         global $pdo;
         try {
-            if ($familyBag->getIdfamilyBagPbf() != "") {
-                $statement = $pdo->prepare("UPDATE tb_familyBag_pbf SET str_month=:str_month, str_year=:str_year, str_month_reference=:str_month_reference, str_year_reference=:str_year_reference, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, str_date_service=:str_date_service, db_value_service=:db_value_service WHERE id_familyBag_pbf = :id;");
-                $statement->bindValue(":id", $familyBag->getIdfamilyBagPbf());
+            if ($familyBag->getIdfamilyBag() != "") {
+                $statement = $pdo->prepare("UPDATE tb_familyBag_ SET str_month=:str_month, str_year=:str_year, str_month_reference=:str_month_reference, str_year_reference=:str_year_reference, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, str_date_service=:str_date_service, db_value_service=:db_value_service WHERE id_familyBag_ = :id;");
+                $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_familyBag_pbf (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_value_service)");
+                $statement = $pdo->prepare("INSERT INTO tb_familyBag_ (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_value_service)");
             }
             $statement->bindValue(":str_month", $familyBag->getStrMonth());
             $statement->bindValue(":str_year", $familyBag->getStrYear());
@@ -58,11 +58,11 @@ class familyBagDAO
     {
         global $pdo;
         try {
-            $statement = $pdo->prepare("SELECT id_familyBag_pbf, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_pbf WHERE id_familyBag_pbf = :id");
-            $statement->bindValue(":id", $familyBag->getIdfamilyBagPbf());
+            $statement = $pdo->prepare("SELECT id_familyBag_, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_ WHERE id_familyBag_ = :id");
+            $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             if ($statement->execute()) {
                 $rs = $statement->fetch( PDO::FETCH_OBJ);
-                $familyBag->setIdfamilyBagPbf($rs->id_familyBag_pbf);
+                $familyBag->setIdfamilyBag($rs->id_familyBag_);
                 $familyBag->setStrMonth($rs->str_month);
                 $familyBag->setStrYear($rs->str_year);
                 $familyBag->setStrMonthReference($rs->str_month_reference);
@@ -102,10 +102,10 @@ class familyBagDAO
         /* Instrução de consulta para paginação com MySQL */
         // $sql = "SELECT C.id_city, S.str_uf as tb_state, C.str_name_city, C.str_cod_siafi_city FROM tb_city C INNER JOIN tb_state S ON S.id_state = C.tb_state_id_state LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-        //$sql = "SELECT id_familyBag_pbf, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_pbf LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
+        //$sql = "SELECT id_familyBag_, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_ LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-        $sql = "SELECT f.id_familyBag_pbf, f.str_month, f.str_year, f.str_month_reference, f.str_year_reference, c.str_name_city, b.str_name_person ,f.str_date_service, f.db_value_service
-        FROM tb_familyBag_pbf f, tb_city c, tb_beneficiaries b 
+        $sql = "SELECT f.id_familyBag_, f.str_month, f.str_year, f.str_month_reference, f.str_year_reference, c.str_name_city, b.str_name_person ,f.str_date_service, f.db_value_service
+        FROM tb_familyBag_ f, tb_city c, tb_beneficiaries b 
         WHERE f.tb_city_id_city = c.id_city and f.tb_beneficiaries_id_beneficiaries = b.id_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
 
@@ -114,7 +114,7 @@ class familyBagDAO
         $dados = $statement->fetchAll(PDO::FETCH_OBJ);
 
         /* Conta quantos registos existem na tabela */
-        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_familyBag_pbf";
+        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_familyBag_";
         $statement = $pdo->prepare($sqlContador);
         $statement->execute();
         $valor = $statement->fetch(PDO::FETCH_OBJ);
@@ -167,7 +167,7 @@ class familyBagDAO
 
                 echo "<tr>
           
-          <td style='text-align: center'>$familyBag->id_familyBag_pbf</td>
+          <td style='text-align: center'>$familyBag->id_familyBag_</td>
           <td style='text-align: center'>$familyBag->str_month</td>
           <td style='text-align: center'>$familyBag->str_year</td>
           <td style='text-align: center'>$familyBag->str_month_reference</td>
@@ -176,8 +176,8 @@ class familyBagDAO
           <td style='text-align: center'>$familyBag->str_name_person</td>
           <td style='text-align: center'>$familyBag->str_date_service</td>
           <td style='text-align: center'>$valor</td>
-          <td style='text-align: center'><a href='?act=upd&id=$familyBag->id_familyBag_pbf' title='Alterar'><i class='ti-reload'></i></a></td>
-          <td style='text-align: center'><a href='?act=del&id=$familyBag->id_familyBag_pbf' title='Remover'><i class='ti-close'></i></a></td>
+          <td style='text-align: center'><a href='?act=upd&id=$familyBag->id_familyBag_' title='Alterar'><i class='ti-reload'></i></a></td>
+          <td style='text-align: center'><a href='?act=del&id=$familyBag->id_familyBag_' title='Remover'><i class='ti-close'></i></a></td>
           </tr>";
             endforeach;
             echo "
