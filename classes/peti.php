@@ -8,114 +8,40 @@
 
 class peti
 {
-    private $id_tb_peti;
-    private $tb_situacao_beneficiario;
-    private $tb_valor_parcela;
-    private $tb_city_id_city;
-    private $tb_beneficiaries_id_beneficiaries;
+    private $id_peti;
     private $str_month;
     private $str_year;
+    private $tb_city_id_city;
+    private $tb_beneficiaries_id_beneficiaries;
+    private $str_benefit_situation;
+    private $db_value;
 
-    /**
-     * Peti constructor.
-     * @param $id_tb_peti
-     * @param $tb_situacao_beneficiario
-     * @param $tb_valor_parcela
-     * @param $tb_city_id_city
-     * @param $tb_beneficiaries_id_beneficiaries
-     * @param $str_month
-     * @param $str_year
-     */
 
-    public function __construct($id_tb_peti, $tb_situacao_beneficiario, $tb_valor_parcela, $tb_city_id_city, $tb_beneficiaries_id_beneficiaries, $str_month, $str_year)
+    public function __construct($id_peti, $str_month, $str_year, $tb_city_id_city, $tb_beneficiaries_id_beneficiaries, $str_benefit_situation, $db_value)
     {
-        $this->id_tb_peti = $id_tb_peti;
-        $this->tb_situacao_beneficiario = $tb_situacao_beneficiario;
-        $this->tb_valor_parcela = $tb_valor_parcela;
-        $this->tb_city_id_city = $tb_city_id_city;
-        $this->tb_beneficiaries_id_beneficiaries = $tb_beneficiaries_id_beneficiaries;
+        $this->id_peti = $id_peti;
         $this->str_month = $str_month;
         $this->str_year = $str_year;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdTbPeti()
-    {
-        return $this->id_tb_peti;
-    }
-
-    /**
-     * @param mixed $id_tb_peti
-     */
-    public function setIdTbPeti($id_tb_peti): void
-    {
-        $this->id_tb_peti = $id_tb_peti;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTbSituacaoBeneficiario()
-    {
-        return $this->tb_situacao_beneficiario;
-    }
-
-    /**
-     * @param mixed $tb_situacao_beneficiario
-     */
-    public function setTbSituacaoBeneficiario($tb_situacao_beneficiario): void
-    {
-        $this->tb_situacao_beneficiario = $tb_situacao_beneficiario;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTbValorParcela()
-    {
-        return $this->tb_valor_parcela;
-    }
-
-    /**
-     * @param mixed $tb_valor_parcela
-     */
-    public function setTbValorParcela($tb_valor_parcela): void
-    {
-        $this->tb_valor_parcela = $tb_valor_parcela;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTbCityIdCity()
-    {
-        return $this->tb_city_id_city;
-    }
-
-    /**
-     * @param mixed $tb_city_id_city
-     */
-    public function setTbCityIdCity($tb_city_id_city): void
-    {
         $this->tb_city_id_city = $tb_city_id_city;
+        $this->tb_beneficiaries_id_beneficiaries = $tb_beneficiaries_id_beneficiaries;
+        $this->str_benefit_situation = $str_benefit_situation;
+        $this->db_value = $db_value;
     }
 
     /**
      * @return mixed
      */
-    public function getTbBeneficiariesIdBeneficiaries()
+    public function getIdPeti()
     {
-        return $this->tb_beneficiaries_id_beneficiaries;
+        return $this->id_peti;
     }
 
     /**
-     * @param mixed $tb_beneficiaries_id_beneficiaries
+     * @param mixed $id_peti
      */
-    public function setTbBeneficiariesIdBeneficiaries($tb_beneficiaries_id_beneficiaries): void
+    public function setIdPeti($id_peti)
     {
-        $this->tb_beneficiaries_id_beneficiaries = $tb_beneficiaries_id_beneficiaries;
+        $this->id_peti = $id_peti;
     }
 
     /**
@@ -129,7 +55,7 @@ class peti
     /**
      * @param mixed $str_month
      */
-    public function setStrMonth($str_month): void
+    public function setStrMonth($str_month)
     {
         $this->str_month = $str_month;
     }
@@ -145,9 +71,73 @@ class peti
     /**
      * @param mixed $str_year
      */
-    public function setStrYear($str_year): void
+    public function setStrYear($str_year)
     {
         $this->str_year = $str_year;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTbCityIdCity()
+    {
+        return $this->tb_city_id_city;
+    }
+
+    /**
+     * @param mixed $tb_city_id_city
+     */
+    public function setTbCityIdCity($tb_city_id_city)
+    {
+        $this->tb_city_id_city = $tb_city_id_city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTbBeneficiariesIdBeneficiaries()
+    {
+        return $this->tb_beneficiaries_id_beneficiaries;
+    }
+
+    /**
+     * @param mixed $tb_beneficiaries_id_beneficiaries
+     */
+    public function setTbBeneficiariesIdBeneficiaries($tb_beneficiaries_id_beneficiaries)
+    {
+        $this->tb_beneficiaries_id_beneficiaries = $tb_beneficiaries_id_beneficiaries;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStrBenefitSituation()
+    {
+        return $this->str_benefit_situation;
+    }
+
+    /**
+     * @param mixed $str_benefit_situation
+     */
+    public function setStrBenefitSituation($str_benefit_situation)
+    {
+        $this->str_benefit_situation = $str_benefit_situation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDbValue()
+    {
+        return $this->db_value;
+    }
+
+    /**
+     * @param mixed $db_value
+     */
+    public function setDbValue($db_value)
+    {
+        $this->db_value = $db_value;
     }
 
 
