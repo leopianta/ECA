@@ -12,7 +12,7 @@ class familyBagDAO
             $statement = $pdo->prepare("DELETE FROM tb_familyBag_pbf WHERE id_familyBag_pbf = :id");
             $statement->bindValue(":id", $familyBag->getIdfamilyBagPbf());
             if ($statement->execute()) {
-                return "<script> alert('Registo foi excluído com êxito !'); </script>";
+                return "<script> alert('Registro foi excluído com êxito !'); </script>";
             } else {
                 throw new PDOException("<script> alert('Não foi possível executar a declaração SQL !'); </script>");
             }
