@@ -35,7 +35,7 @@ class familyBag
     /**
      * @return mixed
      */
-    public function getIdfamilyBagPbf()
+    public function getIdfamilyBag()
     {
         return $this->id_familyBag;
     }
@@ -43,7 +43,7 @@ class familyBag
     /**
      * @param mixed $id_familyBag
      */
-    public function setIdfamilyBagPbf($id_familyBag)
+    public function setIdfamilyBag($id_familyBag)
     {
         $this->id_familyBag = $id_familyBag;
     }

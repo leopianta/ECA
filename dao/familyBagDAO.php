@@ -114,7 +114,7 @@ class familyBagDAO
         $dados = $statement->fetchAll(PDO::FETCH_OBJ);
 
         /* Conta quantos registos existem na tabela */
-        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_familyBag_";
+        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_family_Bag";
         $statement = $pdo->prepare($sqlContador);
         $statement->execute();
         $valor = $statement->fetch(PDO::FETCH_OBJ);

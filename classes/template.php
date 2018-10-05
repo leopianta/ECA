@@ -178,6 +178,30 @@ class Template
                     </a>
                 </li>
                 <li>
+                    <a href='familyBag.php'>
+                        <i class=\"ti-world\"></i>
+                        <p>FamilyBag</p>
+                    </a>
+                </li>
+                                <li>
+                    <a href='peti.php'>
+                        <i class=\"ti-world\"></i>
+                        <p>Peti</p>
+                    </a>
+                </li>
+                                <li>
+                    <a href='cropGuarantee.php'>
+                        <i class=\"ti-world\"></i>
+                        <p>CropGuarantee</p>
+                    </a>
+                </li>
+                                              <li>
+                    <a href='fishermanInsurance.php'>
+                        <i class=\"ti-world\"></i>
+                        <p>fishermanInsurance</p>
+                    </a>
+                </li>
+                <li>
                     <a href='programs.php'>
                         <i class=\"ti-view-list-alt\"></i>
                         <p>Programs</p>

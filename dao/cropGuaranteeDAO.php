@@ -5,10 +5,10 @@ require_once "classes/cropGuarantee.php";
 
 class cropGuaranteeDAO
 {
-    public function remove($cg){
+    public function remover($cg){
         global $pdo;
         try {
-            $statement = $pdo->prepare("DELETE FROM td_crop_guarantee WHERE id_cropGuarantee = :id");
+            $statement = $pdo->prepare("DELETE FROM td_crop_guarantee WHERE id_garantia_safra = :id");
             $statement->bindValue(":id", $cg->getIdCropGuarantee());
             if ($statement->execute()) {
                 return "<script> alert('Registo foi excluído com êxito !'); </script>";
@@ -88,13 +88,13 @@ class cropGuaranteeDAO
         $linha_inicial = ($pagina_atual -1) * QTDE_REGISTROS;
 
         /* Instrução de consulta para paginação com MySQL */
-        $sql = "SELECT C.id_city, S.str_uf as tb_state, C.str_name_city, C.str_cod_siafi_city FROM tb_city C INNER JOIN tb_state S ON S.id_state = C.tb_state_id_state LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
+        $sql = "SELECT id_garantia_safra,tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_month, str_year, db_value FROM td_crop_guarantee LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $dados = $statement->fetchAll(PDO::FETCH_OBJ);
 
         /* Conta quantos registos existem na tabela */
-        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_city";
+        $sqlContador = "SELECT COUNT(*) AS total_registros FROM td_crop_guarantee";
         $statement = $pdo->prepare($sqlContador);
         $statement->execute();
         $valor = $statement->fetch(PDO::FETCH_OBJ);
