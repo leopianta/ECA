@@ -9,7 +9,7 @@ class fishermanInsuranceDAO
     {
         global $pdo;
         try {
-            $statement = $pdo->prepare("DELETE FROM tb_fisherman_insurance WHERE id_fisherman_insurance = :id");
+            $statement = $pdo->prepare("DELETE FROM tb_fisherman_insurance WHERE id_tb_fisherman_insurance= :id");
             $statement->bindValue(":id", $fishermanInsurance->getIdFishermanInsurance());
             if ($statement->execute()) {
                 return "<script> alert('Registo foi excluído com êxito !'); </script>";
@@ -26,14 +26,14 @@ class fishermanInsuranceDAO
         global $pdo;
         try {
             if ($fishermanInsurance->getIdFishermanInsurance() != "") {
-                $statement = $pdo->prepare("UPDATE tb_fisherman_insurance SET str_month=:str_month, str_year=:str_year, dbl_value=:dbl_value, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, tb_city_id_city=:tb_city_id_city WHERE id_fisherman_insurance = :id;");
+                $statement = $pdo->prepare("UPDATE tb_fisherman_insurance SET str_month=:str_month, str_year=:str_year, db_value=:db_value, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, tb_city_id_city=:tb_city_id_city WHERE id_tb_fisherman_insurance= :id;");
                 $statement->bindValue(":id", $fishermanInsurance->getIdFishermanInsurance());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_fisherman_insurance (str_month, str_year,db_value,tb_beneficiaries_id_beneficiaries,tb_city_id_city ) VALUES (:str_month, :str_year,:dbl_value,:tb_beneficiaries_id_beneficiaries,:tb_city_id_city)");
+                $statement = $pdo->prepare("INSERT INTO tb_fisherman_insurance (str_month, str_year,db_value,tb_beneficiaries_id_beneficiaries,tb_city_id_city ) VALUES (:str_month, :str_year,:db_value,:tb_beneficiaries_id_beneficiaries,:tb_city_id_city)");
             }
             $statement->bindValue(":str_month", $fishermanInsurance->getStrMonth());
             $statement->bindValue(":str_year", $fishermanInsurance->getStrYear());
-            $statement->bindValue(":dbl_value", $fishermanInsurance->getDblValue());
+            $statement->bindValue(":db_value", $fishermanInsurance->getDblValue());
             $statement->bindValue(":tb_beneficiaries_id_beneficiaries", $fishermanInsurance->getTbBeneficiariesIdBeneficiaries());
             $statement->bindValue(":tb_city_id_city", $fishermanInsurance->getTbCityIdCity());
             if ($statement->execute()) {
@@ -54,14 +54,14 @@ class fishermanInsuranceDAO
     {
         global $pdo;
         try {
-            $statement = $pdo->prepare("SELECT id_fisherman_insurance, str_month, str_year, dbl_value, tb_beneficiaries_id_beneficiaries, tb_city_id_city FROM tb_fisherman_insurance WHERE id_fisherman_insurance = :id");
+            $statement = $pdo->prepare("SELECT id_tb_fisherman_insurance, str_month, str_year, db_value, tb_beneficiaries_id_beneficiaries, tb_city_id_city FROM tb_fisherman_insurance WHERE id_tb_fisherman_insurance= :id");
             $statement->bindValue(":id", $fishermanInsurance->getIdFishermanInsurance());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
                 $fishermanInsurance->setIdFishermanInsurance($rs->id_fisherman_insurance);
                 $fishermanInsurance->setStrMonth($rs->str_month);
                 $fishermanInsurance->setStrYear($rs->str_year);
-                $fishermanInsurance->setDblValue($rs->dbl_value);
+                $fishermanInsurance->setDblValue($rs->db_value);
                 $fishermanInsurance->setTbBeneficiariesIdBeneficiaries($rs->tb_beneficiaries_id_beneficiaries);
                 $fishermanInsurance->setTbCityIdCity($rs->tb_city_id_city);
 
@@ -95,7 +95,7 @@ class fishermanInsuranceDAO
 
         /* Instrução de consulta para paginação com MySQL */
 
-        //$sql = "SELECT id_fisherman_insurance, str_month, str_year, dbl_value, tb_beneficiaries_id_beneficiaries, tb_city_id_city FROM tb_fisherman_insurance LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
+        //$sql = "SELECT id_fisherman_insurance, str_month, str_year, db_value, tb_beneficiaries_id_beneficiaries, tb_city_id_city FROM tb_fisherman_insurance LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
         $sql = "SELECT f.id_tb_fisherman_insurance, f.str_month, f.str_year, f.db_value, c.str_name_city, b.str_name_person
         FROM tb_fisherman_insurance f, tb_city c, tb_beneficiaries b 
@@ -153,18 +153,18 @@ class fishermanInsuranceDAO
      <tbody>";
             foreach ($dados as $fi):
 
-                $valor = "R$ " . number_format($fi->dbl_value, 2, ',', '.');
+                $valor = "R$ " . number_format($fi->db_value, 2, ',', '.');
 
 
                 echo "<tr>
-        <td style='text-align: center'>$fi->id_fisherman_insurance</td>
+        <td style='text-align: center'>$fi->id_tb_fisherman_insurance</td>
         <td style='text-align: center'>$fi->str_month</td>
         <td style='text-align: center'>$fi->str_year</td>
         <td style='text-align: center'>$valor</td>
         <td style='text-align: center'>$fi->str_name_person</td>
         <td style='text-align: center'>$fi->str_name_city</td>
-        <td style='text-align: center'><a href='?act=upd&id=$fi->id_fisherman_insurance' title='Alterar'><i class='ti-reload'></i></a></td>
-        <td style='text-align: center'><a href='?act=del&id=$fi->id_fisherman_insurance' title='Remover'><i class='ti-close'></i></a></td>
+        <td style='text-align: center'><a href='?act=upd&id=$fi->id_tb_fisherman_insurance' title='Alterar'><i class='ti-reload'></i></a></td>
+        <td style='text-align: center'><a href='?act=del&id=$fi->id_tb_fisherman_insurance' title='Remover'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo "
