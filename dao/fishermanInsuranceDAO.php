@@ -58,7 +58,7 @@ class fishermanInsuranceDAO
             $statement->bindValue(":id", $fishermanInsurance->getIdFishermanInsurance());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
-                $fishermanInsurance->setIdFishermanInsurance($rs->id_fisherman_insurance);
+                $fishermanInsurance->setIdFishermanInsurance($rs->id_tb_fisherman_insurance);
                 $fishermanInsurance->setStrMonth($rs->str_month);
                 $fishermanInsurance->setStrYear($rs->str_year);
                 $fishermanInsurance->setDblValue($rs->db_value);

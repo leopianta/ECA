@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "upd" && $id != "") {
 
-    $familyBag = new familyBag($id,'','','','','','','','');
+    $cropGuarantee = new cropGuarantee($id,'','','','','');
 
-    $resultado = $object->atualizar($familyBag);
+    $resultado = $object->atualizar($cropGuarantee);
     $str_month = $resultado->getStrMonth();
     $str_year = $resultado->getStrYear();
     $tb_city_id_city = $resultado->getTbCityIdCity();
@@ -46,8 +46,8 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "upd" && $id != "") {
 if (isset($_REQUEST["act"]) &&  $_REQUEST["act"] == "save" && $str_month != "" && $str_year != "" && $tb_city_id_city != "" && $tb_beneficiaries_id_beneficiaries != "" &&
     $db_value != "")
 {
-    $familyBag = new familyBag($id, $str_month, $str_year, $tb_city_id_city, $tb_beneficiaries_id_beneficiaries, $db_value);
-    $msg = $object->salvar($familyBag);
+    $cropGuarantee = new cropGuarantee($id, $str_month, $str_year, $db_value, $tb_city_id_city, $tb_beneficiaries_id_beneficiaries);
+    $msg = $object->salvar($cropGuarantee);
     $id = null;
     $str_month = null;
     $str_year =  null;

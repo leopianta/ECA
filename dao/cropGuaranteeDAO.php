@@ -23,11 +23,14 @@ class cropGuaranteeDAO
     public function save($cg){
         global $pdo;
         try {
-            if ($cg->getIdCropGuarantee() != "") {
+                    if ($cg->getIdCropGuarantee() != "") {
                 $statement = $pdo->prepare("UPDATE td_crop_guarantee SET str_month=:str_month, str_year=:str_year, db_value=:db_value, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries WHERE id_cropGuarantee = :id;");
                 $statement->bindValue(":id", $cg->getIdCropGuarantee());
             } else {
                 $statement = $pdo->prepare("INSERT INTO td_crop_guarantee (str_month, str_year, db_value, tb_city_id_city, tb_beneficiaries_id_beneficiaries ) VALUES (:str_month, :str_year, :db_value, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries)");
+
+
+
             }
             $statement->bindValue(":str_month",$cg->getStrMonth());
             $statement->bindValue(":str_year",$cg->getStrYear());
