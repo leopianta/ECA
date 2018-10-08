@@ -29,14 +29,13 @@ class fishermanInsuranceDAO
                 $statement = $pdo->prepare("UPDATE tb_fisherman_insurance SET str_month=:str_month, str_year=:str_year, dbl_value=:dbl_value, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, tb_city_id_city=:tb_city_id_city WHERE id_fisherman_insurance = :id;");
                 $statement->bindValue(":id", $fishermanInsurance->getIdFishermanInsurance());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_fisherman_insurance (str_month, str_year,dbl_value,tb_beneficiaries_id_beneficiaries,tb_city_id_city ) VALUES (:str_month, :str_year,:dbl_value,:tb_beneficiaries_id_beneficiaries,:tb_city_id_city)");
+                $statement = $pdo->prepare("INSERT INTO tb_fisherman_insurance (str_month, str_year,db_value,tb_beneficiaries_id_beneficiaries,tb_city_id_city ) VALUES (:str_month, :str_year,:dbl_value,:tb_beneficiaries_id_beneficiaries,:tb_city_id_city)");
             }
             $statement->bindValue(":str_month", $fishermanInsurance->getStrMonth());
             $statement->bindValue(":str_year", $fishermanInsurance->getStrYear());
             $statement->bindValue(":dbl_value", $fishermanInsurance->getDblValue());
             $statement->bindValue(":tb_beneficiaries_id_beneficiaries", $fishermanInsurance->getTbBeneficiariesIdBeneficiaries());
             $statement->bindValue(":tb_city_id_city", $fishermanInsurance->getTbCityIdCity());
-
             if ($statement->execute()) {
                 if ($statement->rowCount() > 0) {
                     return "<script> alert('Dados cadastrados com sucesso !'); </script>";
@@ -98,7 +97,7 @@ class fishermanInsuranceDAO
 
         //$sql = "SELECT id_fisherman_insurance, str_month, str_year, dbl_value, tb_beneficiaries_id_beneficiaries, tb_city_id_city FROM tb_fisherman_insurance LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-        $sql = "SELECT f.id_fisherman_insurance, f.str_month, f.str_year, f.dbl_value, c.str_name_city, b.str_name_person
+        $sql = "SELECT f.id_tb_fisherman_insurance, f.str_month, f.str_year, f.db_value, c.str_name_city, b.str_name_person
         FROM tb_fisherman_insurance f, tb_city c, tb_beneficiaries b 
         WHERE f.tb_city_id_city = c.id_city and f.tb_beneficiaries_id_beneficiaries = b.id_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
@@ -135,6 +134,7 @@ class fishermanInsuranceDAO
 
         /* Verifica se vai exibir o botão "Anterior" e "Último" */
         $exibir_botao_final = ($range_final > $pagina_atual) ? 'mostrar' : 'esconder';
+
 
         if (!empty($dados)):
             echo "
