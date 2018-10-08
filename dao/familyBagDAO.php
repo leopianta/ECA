@@ -29,6 +29,7 @@ class familyBagDAO
                 $statement = $pdo->prepare("UPDATE tb_family_Bag SET str_month=:str_month, str_year=:str_year, str_month_reference=:str_month_reference, str_year_reference=:str_year_reference, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, dt_saque=:str_date_service, db_valor_saque=:db_value_service WHERE id_tb_family_bag = :id;");
                 $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             } else {
+
                 $statement = $pdo->prepare("INSERT INTO tb_family_Bag (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, dt_saque, db_valor_saque) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_valor_saque)");
             }
             $statement->bindValue(":str_month", $familyBag->getStrMonth());
