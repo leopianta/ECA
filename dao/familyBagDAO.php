@@ -9,7 +9,7 @@ class familyBagDAO
     {
         global $pdo;
         try{
-            $statement = $pdo->prepare("DELETE FROM tb_familyBag_ WHERE id_familyBag_ = :id");
+            $statement = $pdo->prepare("DELETE FROM tb_family_Bag WHERE id_tb_family_bag = :id");
             $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             if ($statement->execute()) {
                 return "<script> alert('Registro foi excluído com êxito !'); </script>";
@@ -26,10 +26,10 @@ class familyBagDAO
         global $pdo;
         try {
             if ($familyBag->getIdfamilyBag() != "") {
-                $statement = $pdo->prepare("UPDATE tb_familyBag_ SET str_month=:str_month, str_year=:str_year, str_month_reference=:str_month_reference, str_year_reference=:str_year_reference, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, str_date_service=:str_date_service, db_value_service=:db_value_service WHERE id_familyBag_ = :id;");
+                $statement = $pdo->prepare("UPDATE tb_family_Bag SET str_month=:str_month, str_year=:str_year, str_month_reference=:str_month_reference, str_year_reference=:str_year_reference, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, dt_saque=:str_date_service, db_valor_saque=:db_value_service WHERE id_tb_family_bag = :id;");
                 $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_familyBag_ (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_value_service)");
+                $statement = $pdo->prepare("INSERT INTO tb_family_Bag (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, dt_saque, db_valor_saque) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_valor_saque)");
             }
             $statement->bindValue(":str_month", $familyBag->getStrMonth());
             $statement->bindValue(":str_year", $familyBag->getStrYear());
@@ -58,7 +58,7 @@ class familyBagDAO
     {
         global $pdo;
         try {
-            $statement = $pdo->prepare("SELECT id_familyBag_, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_ WHERE id_familyBag_ = :id");
+            $statement = $pdo->prepare("SELECT id_family_Bag, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, dt_saque, db_valor_saque FROM tb_family_Bag WHERE id_tb_family_bag = :id");
             $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             if ($statement->execute()) {
                 $rs = $statement->fetch( PDO::FETCH_OBJ);
@@ -104,8 +104,8 @@ class familyBagDAO
 
         //$sql = "SELECT id_familyBag_, str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_date_service, db_value_service FROM tb_familyBag_ LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-        $sql = "SELECT f.id_familyBag_, f.str_month, f.str_year, f.str_month_reference, f.str_year_reference, c.str_name_city, b.str_name_person ,f.str_date_service, f.db_value_service
-        FROM tb_familyBag_ f, tb_city c, tb_beneficiaries b 
+        $sql = "SELECT f.id_tb_family_bag, f.str_month, f.str_year, f.str_month_reference, f.str_year_reference, c.str_name_city, b.str_name_person ,f.dt_saque, f.db_valor_saque
+        FROM tb_family_Bag f, tb_city c, tb_beneficiaries b 
         WHERE f.tb_city_id_city = c.id_city and f.tb_beneficiaries_id_beneficiaries = b.id_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
 

@@ -7,7 +7,7 @@ class petiDAO
     public function remover($peti){
         global $pdo;
         try {
-            $statement = $pdo->prepare("DELETE FROM tb_peti WHERE id_peti = :id");
+            $statement = $pdo->prepare("DELETE FROM tb_peti WHERE id_tb_peti = :id");
             $statement->bindValue(":id", $peti->getIdPeti());
             if ($statement->execute()) {
                 return "<script> alert('Registo foi excluído com êxito !'); </script>";
@@ -23,10 +23,10 @@ class petiDAO
         global $pdo;
         try {
             if ($peti->getIdPeti() != "") {
-                $statement = $pdo->prepare("UPDATE tb_peti SET str_month=:str_month, str_year=:str_year, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, str_benefit_situation=:str_benefit_situation, db_value=:db_value  WHERE id_peti = :id;");
+                $statement = $pdo->prepare("UPDATE tb_peti SET str_month=:str_month, str_year=:str_year, tb_city_id_city=:tb_city_id_city, tb_beneficiaries_id_beneficiaries=:tb_beneficiaries_id_beneficiaries, str_benefit_situation=:str_benefit_situation, db_value=:db_value  WHERE id_tb_peti = :id;");
                 $statement->bindValue(":id", $peti->getIdPeti());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_peti (str_month, str_year, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_benefit_situation, db_value  ) VALUES (:str_month, :str_year, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_benefit_situation, :db_value )");
+                $statement = $pdo->prepare("INSERT INTO tb_peti (str_month, str_year, tb_city_id_city, tb_beneficiaries_id_beneficiaries, tb_situacao_beneficiario, tb_valor_parcela  ) VALUES (:str_month, :str_year, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_benefit_situation, :db_value )");
             }
             $statement->bindValue(":str_month",$peti->getStrMonth());
             $statement->bindValue(":str_year",$peti->getStrYear());
@@ -52,7 +52,7 @@ class petiDAO
     public function atualizar($peti){
         global $pdo;
         try {
-            $statement = $pdo->prepare("SELECT id_peti, str_month, str_year, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_benefit_situation, db_value FROM tb_peti WHERE id_peti = :id");
+            $statement = $pdo->prepare("SELECT id_tb_peti, str_month, str_year, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_benefit_situation, tb_valor_parcela FROM tb_peti WHERE id_peti = :id");
             $statement->bindValue(":id", $peti->getIdPeti());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
@@ -97,7 +97,7 @@ class petiDAO
 
         //$sql = "SELECT id_peti, str_month, str_year, tb_city_id_city, tb_beneficiaries_id_beneficiaries, str_benefit_situation, db_value FROM tb_peti LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-        $sql = "SELECT f.id_peti, f.str_month, f.str_year, c.str_name_city, b.str_name_person ,f.str_benefit_situation, f.db_value
+        $sql = "SELECT f.id_tb_peti, f.str_month, f.str_year, c.str_name_city, b.str_name_person ,f.tb_situacao_beneficiario, f.tb_valor_parcela
         FROM tb_peti f, tb_city c, tb_beneficiaries b 
         WHERE f.tb_city_id_city = c.id_city and f.tb_beneficiaries_id_beneficiaries = b.id_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
@@ -157,7 +157,7 @@ class petiDAO
 
 
                 echo "<tr>
-        <td style='text-align: center'>$peti->id_peti</td>
+        <td style='text-align: center'>$peti->id_tb_peti</td>
         <td style='text-align: center'>$peti->str_month</td>
         <td style='text-align: center'>$peti->str_year</td>
         <td style='text-align: center'>$peti->str_name_city</td>
