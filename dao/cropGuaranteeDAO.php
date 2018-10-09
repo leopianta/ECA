@@ -20,7 +20,7 @@ class cropGuaranteeDAO
         }
     }
 
-    public function save($cg){
+    public function salvar($cg){
         global $pdo;
         try {
                     if ($cg->getIdCropGuarantee() != "") {
@@ -134,19 +134,23 @@ class cropGuaranteeDAO
         <th style='text-align: center; font-weight: bolder;'>Code</th>
         <th style='text-align: center; font-weight: bolder;'>Name</th>
         <th style='text-align: center; font-weight: bolder;'>Code City</th>
-        <th style='text-align: center; font-weight: bolder;'>State</th>
+        <th style='text-align: center; font-weight: bolder;'>Mes</th>
+        <th style='text-align: center; font-weight: bolder;'>Ano</th>
+        <th style='text-align: center; font-weight: bolder;'>Valor</th>
         <th style='text-align: center; font-weight: bolder;' colspan='2'>Actions</th>
        </tr>
      </thead>
      <tbody>";
             foreach ($dados as $city):
                 echo "<tr>
-        <td style='text-align: center'>$city->id_city</td>
-        <td style='text-align: center'>$city->str_name_city</td>
-        <td style='text-align: center'>$city->str_cod_siafi_city</td>
-        <td style='text-align: center'>$city->tb_state</td>
-        <td style='text-align: center'><a href='?act=upd&id=$city->id_city' title='Alterar'><i class='ti-reload'></i></a></td>
-        <td style='text-align: center'><a href='?act=del&id=$city->id_city' title='Remover'><i class='ti-close'></i></a></td>
+        <td style='text-align: center'>$city->id_garantia_safra</td>
+        <td style='text-align: center'>$city->tb_city_id_city</td>
+        <td style='text-align: center'>$city->tb_beneficiaries_id_beneficiaries</td>
+        <td style='text-align: center'>$city->str_month</td>
+        <td style='text-align: center'>$city->str_year</td>
+        <td style='text-align: center'>$city->db_value</td>
+        <td style='text-align: center'><a href='?act=upd&id=$city->id_garantia_safra' title='Alterar'><i class='ti-reload'></i></a></td>
+        <td style='text-align: center'><a href='?act=del&id=$city->id_garantia_safra' title='Remover'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo "

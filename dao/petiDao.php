@@ -152,8 +152,7 @@ class petiDAO
      </thead>
      <tbody>";
             foreach ($dados as $peti):
-
-                $valor = "R$ " . number_format($peti->db_value, 2, ',', '.');
+                $valor = "R$ " . number_format($peti->tb_valor_parcela, 2, ',', '.');
 
 
                 echo "<tr>
@@ -162,10 +161,10 @@ class petiDAO
         <td style='text-align: center'>$peti->str_year</td>
         <td style='text-align: center'>$peti->str_name_city</td>
         <td style='text-align: center'>$peti->str_name_person</td>
-        <td style='text-align: center'>$peti->str_benefit_situation</td>
+        <td style='text-align: center'>$peti->tb_situacao_beneficiario</td>
         <td style='text-align: center'>$valor</td>
-        <td style='text-align: center'><a href='?act=upd&id=$peti->id_peti' title='Alterar'><i class='ti-reload'></i></a></td>
-        <td style='text-align: center'><a href='?act=del&id=$peti->id_peti' title='Remover'><i class='ti-close'></i></a></td>
+        <td style='text-align: center'><a href='?act=upd&id=$peti->id_tb_peti' title='Alterar'><i class='ti-reload'></i></a></td>
+        <td style='text-align: center'><a href='?act=del&id=$peti->id_tb_peti' title='Remover'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo "

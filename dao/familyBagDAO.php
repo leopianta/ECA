@@ -30,7 +30,7 @@ class familyBagDAO
                 $statement->bindValue(":id", $familyBag->getIdfamilyBag());
             } else {
 
-                $statement = $pdo->prepare("INSERT INTO tb_family_Bag (str_month, str_year, str_month_reference, str_year_reference, tb_city_id_city, tb_beneficiaries_id_beneficiaries, dt_saque, db_valor_saque) VALUES (:str_month, :str_year, :str_month_reference, :str_year_reference, :tb_city_id_city, :tb_beneficiaries_id_beneficiaries, :str_date_service, :db_valor_saque)");
+                $statement = $pdo->prepare("INSERT INTO tb_family_Bag (str_year,str_month,str_year_reference,str_month_reference,tb_city_id_city,tb_beneficiaries_id_beneficiaries,dt_saque,db_valor_saque) VALUES (:str_month,:str_year,:str_year_reference,:str_month_reference,:tb_city_id_city, :tb_beneficiaries_id_beneficiaries,:str_date_service,:db_value_service)");
             }
             $statement->bindValue(":str_month", $familyBag->getStrMonth());
             $statement->bindValue(":str_year", $familyBag->getStrYear());
@@ -109,7 +109,6 @@ class familyBagDAO
         FROM tb_family_Bag f, tb_city c, tb_beneficiaries b 
         WHERE f.tb_city_id_city = c.id_city and f.tb_beneficiaries_id_beneficiaries = b.id_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
 
-
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $dados = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -162,23 +161,22 @@ class familyBagDAO
        </tr>
        </thead>
        <tbody>";
+
             foreach ($dados as $familyBag):
-
-                $valor = "R$ " . number_format($familyBag->db_value_service, 2, ',', '.');
-
+                $valor = "R$ " . number_format($familyBag->db_valor_saque, 2, ',', '.');
                 echo "<tr>
           
-          <td style='text-align: center'>$familyBag->id_familyBag_</td>
+          <td style='text-align: center'>$familyBag->id_tb_family_bag</td>
           <td style='text-align: center'>$familyBag->str_month</td>
           <td style='text-align: center'>$familyBag->str_year</td>
           <td style='text-align: center'>$familyBag->str_month_reference</td>
           <td style='text-align: center'>$familyBag->str_year_reference</td>
           <td style='text-align: center'>$familyBag->str_name_city</td>
           <td style='text-align: center'>$familyBag->str_name_person</td>
-          <td style='text-align: center'>$familyBag->str_date_service</td>
+          <td style='text-align: center'>$familyBag->db_valor_saque</td>
           <td style='text-align: center'>$valor</td>
-          <td style='text-align: center'><a href='?act=upd&id=$familyBag->id_familyBag_' title='Alterar'><i class='ti-reload'></i></a></td>
-          <td style='text-align: center'><a href='?act=del&id=$familyBag->id_familyBag_' title='Remover'><i class='ti-close'></i></a></td>
+          <td style='text-align: center'><a href='?act=upd&id=$familyBag->id_tb_family_bag' title='Alterar'><i class='ti-reload'></i></a></td>
+          <td style='text-align: center'><a href='?act=del&id=$familyBag->id_tb_family_bag' title='Remover'><i class='ti-close'></i></a></td>
           </tr>";
             endforeach;
             echo "
