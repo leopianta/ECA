@@ -149,8 +149,8 @@ class familyBagDAO
        <thead>
          <tr style='text-transform: uppercase;' class='active'>
             <th style='text-align: center; font-weight: bolder;'>Code</th>
-            <th style='text-align: center; font-weight: bolder;'>Month</th>
             <th style='text-align: center; font-weight: bolder;'>Year</th>
+            <th style='text-align: center; font-weight: bolder;'>Month</th>
             <th style='text-align: center; font-weight: bolder;'>Month Reference</th>
             <th style='text-align: center; font-weight: bolder;'>Year Reference</th>
             <th style='text-align: center; font-weight: bolder;'>City</th>
